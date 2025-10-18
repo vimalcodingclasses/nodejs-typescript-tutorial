@@ -1,7 +1,6 @@
 import { CreateUserRequest } from "../dto/Request/CreateUserRequest";
 import { CreateUserResponse } from "../dto/Response/CreateUserResponse";
 import { UserRepository } from "../repositories/UserRepository";
-import logger from "../../utils/logger";
 
 export class UserService {
     private userRepository: UserRepository;

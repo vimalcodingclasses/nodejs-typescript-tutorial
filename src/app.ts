@@ -2,12 +2,13 @@ import 'dotenv/config';
 import express, { Application } from 'express';
 import { createExpressServer } from 'routing-controllers';
 import * as bodyParser from 'body-parser';
+import path from 'path';
 
-import { UserController } from './api/controllers/UserController';
 import { dataSource } from './db/data-source';
+import logger from './utils/logger';
 
 const app: Application = createExpressServer({
-    controllers: [UserController]
+    controllers: [path.join(__dirname + '/api/controllers/*')]
 });
 
 app.use(express.json())
@@ -18,10 +19,10 @@ const PORT: number = parseInt(process.env.SERVER_PORT!);
 
 dataSource.initialize()
     .then(() => {
-        console.log('Database connected successfully');
+        logger.info('Database connected successfully');
         app.listen(PORT, () => {
-            console.log(`Server is running on http://localhost:${PORT}`);
+            logger.info(`Server is running on http://localhost:${PORT}`);
         });
     }).catch((err) => {
-        console.log('Error in db connection', err);
+        logger.error('Error in db connection', err);
     });

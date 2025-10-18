@@ -17,13 +17,11 @@ export class UserController {
 
     @Get('/')
     public getAllUsers(@Req() req: any, @Res() res: any) {
-        console.log('get all users');
         return this.userService.getAllUsers();
     }
 
     @Get('/:id')
     public getUserById(@Req() req: any, @Res() res: any, @Param('id') userId: any) {
-        console.log('Get user by id');
         return this.userService.getUserById(userId);
     }
 
@@ -35,13 +33,11 @@ export class UserController {
 
     @Put('/:id')
     public updateUser(@Req() req: any, @Res() res: any, @Param('id') userId: any, @Body() payload: any) {
-        console.log('updating user');
         return this.userService.updateUser(userId, payload);
     }
 
     @Delete('/:id')
     public deleteUser(@Req() req: any, @Res() res: any, @Param('id') userId: any) {
-        console.log('deleting user');
         return this.userService.deleteUser(userId);
     }
 }
