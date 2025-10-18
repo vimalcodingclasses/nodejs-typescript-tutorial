@@ -1,15 +1,13 @@
 import 'reflect-metadata';
 import { Body, Delete, Get, JsonController, Param, Post, Put, Req, Res, UseBefore } from 'routing-controllers';
 import { Request, Response } from 'express';
+import { plainToInstance } from 'class-transformer';
 
 import { UserService } from '../services/UserService';
 import { CreateUserRequest } from '../dto/Request/CreateUserRequest';
 import { CreateUserResponse } from '../dto/Response/CreateUserResponse';
-import { plainToInstance } from 'class-transformer';
-import { ErrorHandlerMiddleware } from '../middlewares/ErrorHandlerMiddleware';
 
 @JsonController('/users')
-@UseBefore(ErrorHandlerMiddleware)
 export class UserController {
     private userService: UserService;
 
