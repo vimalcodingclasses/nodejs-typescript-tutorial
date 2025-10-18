@@ -3,3 +3,5 @@ package-lock.json
 dist/
 launch.json
 .env
+error.log
+combined.log

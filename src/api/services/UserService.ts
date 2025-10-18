@@ -18,17 +18,7 @@ export class UserService {
     }
 
     public async saveUser(payload: CreateUserRequest): Promise<CreateUserResponse> {
-        try {
-            logger.info('Attempting to save user');
-            throw new Error('Error occur')
-            return await this.userRepository.saveUser(payload);
-        } catch (error) {
-            throw {
-                code: 400,
-                message: 'Error in saving user',
-                description: 'Error in saving user'
-            }
-        }
+        return await this.userRepository.saveUser(payload);
     }
 
     public updateUser(userId: any, payload: any) {
