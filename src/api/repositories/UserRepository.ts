@@ -27,6 +27,7 @@ export class UserRepository extends MongoRepository<User> {
     public async saveUser(payload: CreateUserRequest): Promise<CreateUserResponse> {
         const newUser = this.create(payload);
         const savedUser = await this.save(newUser);
+        throw new Error();
         return JSON.parse(JSON.stringify(savedUser));
     }
 

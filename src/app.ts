@@ -8,6 +8,7 @@ import { dataSource } from './db/data-source';
 import logger from './utils/logger';
 
 const app: Application = createExpressServer({
+    defaultErrorHandler: false,
     controllers: [path.join(__dirname + '/api/controllers/*')]
 });
 

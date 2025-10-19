@@ -1,12 +1,16 @@
+import logger from "../../utils/logger";
 import { CreateUserRequest } from "../dto/Request/CreateUserRequest";
 import { CreateUserResponse } from "../dto/Response/CreateUserResponse";
 import { UserRepository } from "../repositories/UserRepository";
+import { JwtService } from "../../utils/JwtService";
 
 export class UserService {
     private userRepository: UserRepository;
+    private jwtService: JwtService;
 
     public constructor() {
         this.userRepository = new UserRepository();
+        this.jwtService = new JwtService();
     }
     public getAllUsers() {
         return this.userRepository.getAllUsers();
@@ -17,7 +21,29 @@ export class UserService {
     }
 
     public async saveUser(payload: CreateUserRequest): Promise<CreateUserResponse> {
-        return await this.userRepository.saveUser(payload);
+        try {
+            return await this.userRepository.saveUser(payload);
+        } catch (error) {
+            logger.error('Error in saving user', error);
+            throw {
+                code: 400,
+                message: 'Error in saving user',
+                description: 'Error in saving user'
+            }
+        }
+
+    }
+
+    public async login(payload: any): Promise<any> {
+        const result = this.jwtService.generateToken(payload);
+        return {
+            token: result
+        }
+    }
+
+    public async verifyToken(payload: any): Promise<any> {
+        const result = this.jwtService.verifyToken(payload?.token);
+        return result;
     }
 
     public updateUser(userId: any, payload: any) {
