@@ -11,7 +11,7 @@ const app: Application = createExpressServer({
     controllers: [path.join(__dirname + '/api/controllers/*')]
 });
 
-app.use(express.json())
+app.use(express.json());
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 

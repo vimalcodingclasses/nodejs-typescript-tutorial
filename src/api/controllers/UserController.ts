@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { Body, Delete, Get, JsonController, Param, Post, Put, Req, Res, UseBefore } from 'routing-controllers';
+import { Body, Delete, Get, JsonController, Param, Post, Put, Req, Res } from 'routing-controllers';
 import { Request, Response } from 'express';
 import { plainToInstance } from 'class-transformer';
 

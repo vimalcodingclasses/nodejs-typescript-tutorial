@@ -5,25 +5,25 @@ import * as bcrypt from 'bcrypt';
 @Entity()
 export class User {
     @ObjectIdColumn()
-    public _id: ObjectId | undefined;
+    public _id!: ObjectId;
 
     @Column()
-    public firstName: string | undefined;
+    public firstName!: string;
 
     @Column()
-    public lastName: string | undefined;
+    public lastName!: string;
 
     @Column({ unique: true })
-    public email: string | undefined;
+    public email!: string;
 
     @Column()
-    public password: string | undefined;
+    public password!: string;
 
     @CreateDateColumn()
-    public createdAt: Date | undefined;
+    public createdAt!: Date;
 
     @UpdateDateColumn()
-    public updatedAt: Date | undefined;
+    public updatedAt!: Date;
 
     @BeforeInsert()
     @BeforeUpdate()
