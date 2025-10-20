@@ -24,10 +24,17 @@ export class UserRepository extends MongoRepository<User> {
         return JSON.parse(JSON.stringify(fetchUserById));
     }
 
+    public async getUserByEmail(email: string): Promise<any> {
+        const fetchUserByEmail = await this.findOne({
+            select: ['email', 'password'],
+            where: { email }
+        });
+        return fetchUserByEmail;
+    }
+
     public async saveUser(payload: CreateUserRequest): Promise<CreateUserResponse> {
         const newUser = this.create(payload);
         const savedUser = await this.save(newUser);
-        throw new Error();
         return JSON.parse(JSON.stringify(savedUser));
     }
 

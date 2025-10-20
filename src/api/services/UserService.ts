@@ -1,3 +1,5 @@
+import * as bcrypt from 'bcrypt';
+
 import logger from "../../utils/logger";
 import { CreateUserRequest } from "../dto/Request/CreateUserRequest";
 import { CreateUserResponse } from "../dto/Response/CreateUserResponse";
@@ -35,9 +37,29 @@ export class UserService {
     }
 
     public async login(payload: any): Promise<any> {
-        const result = this.jwtService.generateToken(payload);
-        return {
-            token: result
+        try {
+            const verifyEmail = await this.userRepository.getUserByEmail(payload?.email);
+            if (verifyEmail?.email !== payload?.email) {
+                throw {
+                    code: 400,
+                    message: 'Invalid email',
+                    description: 'Invalid email. pls check and try again'
+                }
+            }
+            const verifyPassword = await bcrypt.compare(payload?.password, verifyEmail?.password);
+            if (!verifyPassword) {
+                throw {
+                    code: 400,
+                    message: 'Invalid password',
+                    description: 'Invalid password. pls check and try again'
+                }
+            }
+            const result = this.jwtService.generateToken(payload);
+            return {
+                token: result
+            }
+        } catch (error) {
+            throw error;
         }
     }
 
