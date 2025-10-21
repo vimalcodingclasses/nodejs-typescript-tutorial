@@ -3,11 +3,9 @@ import fs from 'fs';
 
 export class JwtService {
     private expiresIn: number;
-    private secret: string;
 
     public constructor() {
         this.expiresIn = parseInt(process.env.JWT_EXPIRES!);
-        this.secret = process.env.JWT_SECRET!;
     }
 
     public generateToken(payload: any): string {
