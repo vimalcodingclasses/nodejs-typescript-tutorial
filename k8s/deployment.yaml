@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ts-app-deployment
+  labels:
+    app: ts-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ts-app
+  template:
+    metadata:
+      labels:
+        app: ts-app
+    spec:
+      containers:
+      - name: ts-app
+        # GitHub Actions will dynamically replace 'IMAGE_TAG' with the commit SHA
+        image: DOCKERHUB_USERNAME/my-ts-app:IMAGE_TAG
+        ports:
+        - containerPort: 3000
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
