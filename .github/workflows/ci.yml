@@ -26,6 +26,7 @@ jobs:
       with:
         node-node-version: '20'
         cache: 'npm' # Caches dependencies for faster subsequent runs
+        cache-dependency-path: 'nodejs-typescript-tutorial/package-lock.json' 
 
     # Step 3: Install dependencies
     - name: Install dependencies
